@@ -1,0 +1,23 @@
+create table CUSTOMER(
+	ID INT auto_increment,
+	NAME VARCHAR(255),
+	DOB DATE,
+	FAVORITE_MEAL_NAME VARCHAR(255),
+	primary key (ID)
+);
+
+----------------------------------------------------------------------
+
+insert into CUSTOMER(NAME, DOB, FAVORITE_MEAL_NAME)
+values ("Alice", now(), "Spaghetti"),
+('Bob', now(), 'Spaghetti bolognese'),
+('Frank', now(), 'Sushi Platter');
+
+update CUSTOMER
+set FAVORITE_MEAL_NAME = 'Polpette al Sugo'
+where id = 1;
+
+delete from CUSTOMER
+where ID>6 and ID<=10; -- avevo creato pèer sbaglio altri clienti e così ho usato il delete
+
+truncate customer;
