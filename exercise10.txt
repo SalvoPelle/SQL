@@ -96,9 +96,10 @@ group by m.NAME;
 -- CHE SAREBBE ANCHE UGUALE ALLA MEDIA...
 
 5.
-select count(I.NAME)  from meal m
-inner join ingredient i on I.MEAL_ID = M.MEAL_ID;
--- NON LO SO
+select m.NAME from meal m
+inner join ingredient i on I.MEAL_ID = M.MEAL_ID
+group by m.NAME
+having count(i.NAME)>6 ;
 
 6.
 CREATE TABLE CUSTOMER (
