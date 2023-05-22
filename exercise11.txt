@@ -1,0 +1,89 @@
+CREATE TABLE MEAL (
+  MEAL_ID INT AUTO_INCREMENT,
+  NAME VARCHAR(255),
+  PRICE DOUBLE,
+  CALORIES INT
+);
+
+CREATE TABLE INGREDIENT (
+  MEAL_ID INT REFERENCES MEAL(MEAL_ID),
+  NAME VARCHAR(255),
+  CONTAINS_LACTOSE BOOLEAN,
+  VEGETARIAN BOOLEAN,
+  VEGAN BOOLEAN,
+  GLUTEN_FREE BOOLEAN
+);
+
+INSERT INTO MEAL(MEAL_ ID, NAME, PRICE, CALORIES)
+VALUES (1, 'Grilled Chicken Sandwich', 8.99, 400),
+(2, 'Lentil Dahl', 5.99, 350),
+(3, 'Pesto Pasta', 10.99, 550),
+(4, 'Spaghetti Bolognese', 12.99, 600),
+(5, 'Steak and Mash', 19.99, 800),
+(6, 'Sushi Platter', 15.99, 700);
+
+INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES (1, 'Grilled Chicken', FALSE, FALSE, FALSE, TRUE),
+(1, 'Bread', FALSE, TRUE, FALSE, FALSE),
+(1, 'Lettuce', FALSE, TRUE, TRUE, TRUE),
+(1, 'Tomato', FALSE, TRUE, TRUE, TRUE),
+(1, 'Mayo', TRUE, TRUE, FALSE, TRUE);
+
+INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES (2, 'Lentils', FALSE, TRUE, TRUE, TRUE),
+(2, 'Onion', FALSE, TRUE, TRUE, TRUE),
+(2, 'Garlic', FALSE, TRUE, TRUE, TRUE),
+(2, 'Ginger', FALSE, TRUE, TRUE, TRUE),
+(2, 'Cumin', FALSE, TRUE, TRUE, TRUE),
+(2, 'Turmeric', FALSE, TRUE, TRUE, TRUE);
+
+INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES (3, 'Pasta', FALSE, TRUE, FALSE, FALSE),
+(3, 'Pesto', TRUE, TRUE, FALSE, TRUE),
+(3, 'Pine Nuts', FALSE, TRUE, TRUE, TRUE),
+(3, 'Basil', FALSE, TRUE, TRUE, TRUE),
+(3, 'Garlic', FALSE, TRUE, TRUE, TRUE),
+(3, 'Parmesan Cheese', TRUE, FALSE, FALSE, FALSE);
+
+INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES (4, 'Spaghetti', FALSE, TRUE, FALSE, FALSE),
+(4, 'Ground Beef', FALSE, FALSE, FALSE, TRUE),
+(4, 'Onion', FALSE, TRUE, TRUE, TRUE),
+(4, 'Garlic', FALSE, TRUE, TRUE, TRUE),
+(4, 'Tomato Sauce', FALSE, TRUE, TRUE, TRUE);
+
+INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES (5, 'Steak', FALSE, FALSE, FALSE, TRUE),
+(5, 'Mashed Potatoes', FALSE, TRUE, FALSE, TRUE),
+(5, 'Butter', TRUE, TRUE, FALSE, TRUE),
+(5, 'Salt', FALSE, TRUE, TRUE, TRUE),
+(5, 'Pepper', FALSE, TRUE, TRUE, TRUE);
+
+INSERT INTO INGREDIENT (MEAL_ID, NAME, CONTAINS_LACTOSE, VEGETARIAN, VEGAN, GLUTEN_FREE)
+VALUES (6, 'Sushi Rice', FALSE, TRUE, TRUE, FALSE),
+(6, 'Nori', FALSE, TRUE, TRUE, TRUE),
+(6, 'Tuna', FALSE, FALSE, FALSE, TRUE),
+(6, 'Salmon', FALSE, FALSE, FALSE, TRUE),
+(6, 'Avocado', FALSE, TRUE, TRUE, TRUE),
+(6, 'Wasabi', FALSE, TRUE, TRUE, TRUE),
+(6, 'Soy Sauce', FALSE, TRUE, TRUE, TRUE);
+
+-----------------------------------------------------------------------------------------------
+
+select * from meal m
+inner join ingredient i on i.meal_id = m.meal_id;
+
+select * from meal m
+left join ingredient i on i.meal_id = m.meal_id -- prende in considerazione la tabella meal e le colonne in comune con ingredient
+
+select * from meal m
+right join ingredient i on i.meal_id = m.meal_id -- prende in considerazione la tabella ingredient e le colonne in comune con meal
+
+select * from meal m
+left join ingredient i on i.meal_id = m.meal_id
+where i.meal_id is null  -- prende in considerazione solo la tabella meal escludendo le colonne in comune
+
+select * from meal m
+right join ingredient i on i.meal_id = m.meal_id
+where m.meal_id is null-- prende in considerazione solo la tabella ingredient escludendo le colonne in comune
+
